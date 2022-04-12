@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app/themes/constants.dart';
 import 'package:flutter_e_commerce_app/themes/theme.dart';
-import 'package:flutter_e_commerce_app/views/widgets/rounded_button.dart';
 import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 import 'package:formz/formz.dart';
 
-import '../../../bloc/auth/sign up/sign_up_cubit.dart';
-import '../../../bloc/auth/sign up/sign_up_state.dart';
+import '../../../cubit/sign_up/sign_up_cubit.dart';
+import '../../../cubit/sign_up/sign_up_state.dart';
 import '../../../themes/light_color.dart';
 
 class SignUpForm extends StatelessWidget {

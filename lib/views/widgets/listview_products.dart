@@ -3,7 +3,6 @@ import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 
 import '../../themes/constants.dart';
 import '../../models/product_model.dart';
-import '../../themes/light_color.dart';
 import 'product_card.dart';
 
 class ListViewProducts extends StatelessWidget {
@@ -38,8 +37,9 @@ class ListViewProducts extends StatelessWidget {
                   onPressed: press,
                   child: const TitleText(
                     text: 'See All',
-                    color: LightColor.titleTextColor,
+                    color: Color.fromARGB(255, 179, 187, 187),
                     fontSize: 16,
+                    fontWeight: FontWeight.w700,
                   ),
                   style: TextButton.styleFrom(
                     // textStyle: const TextStyle(
@@ -57,7 +57,7 @@ class ListViewProducts extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: products.length,
+              itemCount: products.length > 5 ? 5 : products.length,
               itemBuilder: (context, index) {
                 return Row(
                   children: [

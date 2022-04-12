@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 
-import '../../../controller/auth_repository.dart';
-import '../../../models/form_inputs/email.dart';
-import '../../../models/form_inputs/password.dart';
+import '../../controller/auth_repository.dart';
+import '../../models/form_inputs/email.dart';
+import '../../models/form_inputs/password.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

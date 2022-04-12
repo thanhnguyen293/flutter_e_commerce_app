@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_e_commerce_app/bloc/bottom_nav_bar/home_cubit.dart';
-import 'package:flutter_e_commerce_app/bloc/bottom_nav_bar/home_state.dart';
+import 'package:flutter_e_commerce_app/cubit/bottom_nav_bar/home_cubit.dart';
+import 'package:flutter_e_commerce_app/cubit/bottom_nav_bar/home_state.dart';
 import 'package:flutter_e_commerce_app/bloc/category/category_bloc.dart';
 import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
 import 'package:flutter_e_commerce_app/cubit/update_profile/update_password_cubit.dart';

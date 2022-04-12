@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
-import 'package:flutter_e_commerce_app/controller/wishlist/wishlist_repository.dart';
 import 'package:flutter_e_commerce_app/models/cart_model.dart';
 
 import 'package:flutter_e_commerce_app/themes/constants.dart';
@@ -38,8 +37,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          _floatingButton(widget.product, selectedSize.toString()),
+      floatingActionButton: _floatingButton(widget.product, selectedSize),
       body: Container(
         decoration: const BoxDecoration(
           // gradient: LinearGradient(
@@ -103,8 +101,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         const SizedBox(height: kDefaultPadding),
                         _availableSize(),
                         const SizedBox(height: kDefaultPadding),
-                        _availableColor(),
-                        const SizedBox(height: kDefaultPadding),
+                        // _availableColor(),
+                        // const SizedBox(height: kDefaultPadding),
                         _description(),
                       ],
                     ),
@@ -389,19 +387,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  FloatingActionButton _floatingButton(Product product, String size) {
+  FloatingActionButton _floatingButton(Product product, double size) {
     return FloatingActionButton(
       onPressed: () {
-        const snackBar = SnackBar(
-          content: Text('Added to your Cart!'),
-          backgroundColor: LightColor.kPrimaryColor,
-          duration: Duration(milliseconds: 600),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        if (size != 0) {
+          const snackBar = SnackBar(
+            content: Text('Added to your Cart!'),
+            backgroundColor: LightColor.kPrimaryColor,
+            duration: Duration(milliseconds: 600),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-        context.read<CartBloc>().add(
-              CartProductAdded(CartItem(product: product, size: size)),
-            );
+          context.read<CartBloc>().add(
+                CartProductAdded(
+                  CartItem(
+                    id: product.id + '-' + selectedSize.toString(),
+                    title: product.title,
+                    productId: product.id,
+                    imageUrl: product.imageUrl.first,
+                    price: product.price,
+                    size: selectedSize,
+                  ),
+                ),
+              );
+        }
       },
       backgroundColor: LightColor.kPrimaryColor,
       child: const Icon(

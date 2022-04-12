@@ -73,16 +73,16 @@ class FavoritePage extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Icon(
-                  Icons.delete_outline,
-                  color: LightColor.kPrimaryColor,
-                ),
-              ),
-            )
+            // InkWell(
+            //   onTap: () {},
+            //   child: Container(
+            //     padding: const EdgeInsets.all(10),
+            //     child: const Icon(
+            //       Icons.delete_outline,
+            //       color: LightColor.kPrimaryColor,
+            //     ),
+            //   ),
+            // )
           ],
         ));
   }

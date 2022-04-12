@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_e_commerce_app/bloc/auth/sign%20up/sign_up_state.dart';
 import 'package:formz/formz.dart';
 
-import '../../../controller/auth_repository.dart';
-import '../../../models/form_inputs/confirmed_password.dart';
-import '../../../models/form_inputs/email.dart';
-import '../../../models/form_inputs/password.dart';
+import '../../controller/auth_repository.dart';
+import '../../models/form_inputs/confirmed_password.dart';
+import '../../models/form_inputs/email.dart';
+import '../../models/form_inputs/password.dart';
+import 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit(this._authenticationRepository) : super(const SignUpState());

@@ -11,42 +11,86 @@ class CartRepository extends BaseCartRepository {
   CartRepository({
     FirebaseFirestore? firebaseFirestore,
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+  @override
+  Future<void> addProductToCart(CartItem cartItem, int quantity) async {
+    String email = FirebaseAuth.instance.currentUser!.email!;
 
-  // Future<void> addProductToCart(CartItem cartItem, int quantity) async {
-  //   String email = FirebaseAuth.instance.currentUser!.email!;
+    _firebaseFirestore
+        .collection('cart')
+        .doc(email)
+        .collection('items')
+        .doc(cartItem.id)
+        .set(
+      {
+        'id': cartItem.id,
+        'productId': cartItem.productId,
+        'title': cartItem.title,
+        'price': cartItem.price,
+        'size': cartItem.size,
+        'imageUrl': cartItem.imageUrl,
+        'quantity': quantity,
+      },
+    );
+  }
 
-  //   _firebaseFirestore.collection('cart').doc(email).collection('items').add({
-  //     'product': Product.toSnapshot(cartItem.product),
-  //     'size': cartItem.size,
-  //     'quantity': quantity,
-  //   });
-  // }
+  @override
+  Future<void> removeSingleProductFromCart(
+      CartItem cartItem, int quantity) async {
+    String email = FirebaseAuth.instance.currentUser!.email!;
 
-  // @override
-  // Future<void> removeProductToWishlist(CartItem cartItem, int quantity) async {
-  //   String email = FirebaseAuth.instance.currentUser!.email!;
+    _firebaseFirestore
+        .collection('cart')
+        .doc(email)
+        .collection('items')
+        .doc(cartItem.id)
+        .set(
+      {
+        'id': cartItem.id,
+        'productId': cartItem.productId,
+        'title': cartItem.title,
+        'price': cartItem.price,
+        'size': cartItem.size,
+        'imageUrl': cartItem.imageUrl,
+        'quantity': quantity,
+      },
+    );
+  }
 
-  //   _firebaseFirestore
-  //       .collection('wishlist')
-  //       .doc(email)
-  //       .collection('items')
-  //       .doc(cartItem.id)
-  //       .delete();
-  // }
+  @override
+  Future<void> removeProductFromCart(CartItem cartItem) async {
+    String email = FirebaseAuth.instance.currentUser!.email!;
 
-  // @override
-  // Stream<Cart> getWishlist() {
-  //   String email = FirebaseAuth.instance.currentUser!.email!;
-  //   return _firebaseFirestore
-  //       .collection('wishlist')
-  //       .doc(email)
-  //       .collection('items')
-  //       .snapshots()
-  //       .map((snapshot) {
-  //     final List<Cart> carts =
-  //         snapshot.docs.map((doc) => Cart.fromSnapshot(doc)).toList();
-  //     final Cart cart = Cart(cartItems: carts);
-  //     return carts;
-  //   });
-  // }
+    _firebaseFirestore
+        .collection('cart')
+        .doc(email)
+        .collection('items')
+        .doc(cartItem.id)
+        .delete();
+  }
+
+  @override
+  Stream<Cart> getCart() {
+    String email = FirebaseAuth.instance.currentUser!.email!;
+    return _firebaseFirestore
+        .collection('cart')
+        .doc(email)
+        .collection('items')
+        .snapshots()
+        .map((snapshot) {
+      List<Map<CartItem, int>> cartItems = snapshot.docs
+          .map((doc) => {
+                CartItem.fromSnapshot(doc):
+                    int.parse(doc['quantity'].toString())
+              })
+          .toList();
+      Map<CartItem, int> map = {
+        for (var item in cartItems) item.keys.first: item.values.first
+      };
+      print(map);
+
+      Cart cart = Cart(cartItems: map);
+
+      return cart;
+    });
+  }
 }

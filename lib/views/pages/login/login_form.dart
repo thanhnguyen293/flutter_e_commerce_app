@@ -6,8 +6,8 @@ import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 
-import '../../../bloc/auth/login/login_cubit.dart';
-import '../../../bloc/auth/login/login_state.dart';
+import '../../../cubit/login/login_cubit.dart';
+import '../../../cubit/login/login_state.dart';
 import '../../../themes/light_color.dart';
 import '../sign_up/sign_up_page.dart';
 

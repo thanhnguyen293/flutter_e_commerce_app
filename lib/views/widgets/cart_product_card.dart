@@ -73,12 +73,12 @@ class CartProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(kDefaultRadius / 2)),
       title: const TitleText(
         text: 'Remove from cart!',
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
       ),
       content: const TitleText(
         text: 'Do you want to remove the product from the cart?',
         fontSize: 16,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w500,
       ),
       actions: <Widget>[
         TextButton(
@@ -87,7 +87,8 @@ class CartProductCard extends StatelessWidget {
           },
           child: const TitleText(
             text: 'Cancel',
-            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
             color: LightColor.skyBlue,
           ),
         ),
@@ -98,7 +99,8 @@ class CartProductCard extends StatelessWidget {
           },
           child: const TitleText(
             text: 'Accept',
-            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
             color: LightColor.skyBlue,
           ),
         ),
@@ -112,7 +114,7 @@ class CartProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TitleText(
-            text: cartItem.product.title,
+            text: cartItem.title,
             fontSize: 15,
             //fontWeight: FontWeight.w700,
           ),
@@ -159,7 +161,7 @@ class CartProductCard extends StatelessWidget {
                 fontSize: 14,
               ),
               TitleText(
-                text: cartItem.product.price.toString(),
+                text: cartItem.price.toString(),
                 fontSize: 14,
                 //style: Theme.of(context).textTheme.headline6,
               ),
@@ -201,16 +203,24 @@ class CartProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(kDefaultRadius / 3)),
                 child: Center(
                   child: TitleText(
-                    text: 'x' + quantity.toString(),
+                    text: 'x$quantity',
                     fontSize: 14,
                   ),
                 ),
               ),
               InkWell(
                 onTap: () {
-                  context.read<CartBloc>().add(
-                        CartSingleProductRemoved(cartItem),
-                      );
+                  if (quantity > 1) {
+                    context.read<CartBloc>().add(
+                          CartSingleProductRemoved(cartItem),
+                        );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => _showAlertDialog(context),
+                    );
+                    // context.read<CartBloc>().add(CartProductRemoved(cartItem));
+                  }
                 },
                 child: const Icon(Icons.arrow_drop_down),
               )
@@ -229,7 +239,7 @@ class CartProductCard extends StatelessWidget {
           color: LightColor.kPrimaryLightColor,
           borderRadius: BorderRadius.circular(kDefaultRadius / 2)),
       child: Image.network(
-        cartItem.product.imageUrl.first,
+        cartItem.imageUrl,
         fit: BoxFit.fitWidth,
         width: 100,
         height: 80,

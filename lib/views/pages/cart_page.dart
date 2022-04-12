@@ -178,13 +178,14 @@ class CartPage extends StatelessWidget {
   Expanded _cartItems(CartLoaded state) {
     return Expanded(
       child: ListView.builder(
-          itemCount: state.cart.cartItems.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CartProductCard(
-              cartItem: state.cart.cartItems.keys.elementAt(index),
-              quantity: state.cart.cartItems.values.elementAt(index),
-            );
-          }),
+        itemCount: state.cart.cartItems.length,
+        itemBuilder: (BuildContext context, int index) {
+          return CartProductCard(
+            cartItem: state.cart.cartItems.keys.elementAt(index),
+            quantity: state.cart.cartItems.values.elementAt(index),
+          );
+        },
+      ),
     );
   }
 
@@ -210,16 +211,16 @@ class CartPage extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Icon(
-                  Icons.delete_outline,
-                  color: LightColor.kPrimaryColor,
-                ),
-              ),
-            )
+            // InkWell(
+            //   onTap: () {},
+            //   child: Container(
+            //     padding: const EdgeInsets.all(10),
+            //     child: const Icon(
+            //       Icons.delete_outline,
+            //       color: LightColor.kPrimaryColor,
+            //     ),
+            //   ),
+            // )
           ],
         ));
   }

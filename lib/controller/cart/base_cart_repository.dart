@@ -1,5 +1,8 @@
+import 'package:flutter_e_commerce_app/models/cart_model.dart';
+
 abstract class BaseCartRepository {
-  // Stream<Wishlist> getWishlist();
-  // Future<void> removeProductToWishlist(Product product);
-  // Future<void> addProductToWishlist(Product product);
+  Stream<Cart> getCart();
+  Future<void> removeSingleProductFromCart(CartItem cartItem, int quantity);
+  Future<void> removeProductFromCart(CartItem cartItem);
+  Future<void> addProductToCart(CartItem cartItem, int quantity);
 }

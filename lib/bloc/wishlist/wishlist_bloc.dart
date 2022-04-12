@@ -14,7 +14,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
   WishlistBloc() : super(WishlistLoading()) {
     on<LoadWishlist>(_onLoadWishlist);
-    on<WishlistUpdate>(onWishlistUpdate);
+    on<WishlistUpdate>(_onWishlistUpdate);
     on<WishlistProductAdded>(_onWishlistProductAdded);
     on<WishlistProductRemoved>(_onWishlistProductRemoved);
   }
@@ -26,14 +26,12 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     });
   }
 
-  onWishlistUpdate(WishlistUpdate event, Emitter<WishlistState> emit) {
+  _onWishlistUpdate(WishlistUpdate event, Emitter<WishlistState> emit) {
     emit(WishlistLoaded(wishlist: event.wishlist));
   }
 
   _onWishlistProductAdded(
-    WishlistProductAdded event,
-    Emitter<WishlistState> emit,
-  ) {
+      WishlistProductAdded event, Emitter<WishlistState> emit) {
     final WishlistRepository _wishlistRepository = WishlistRepository();
     _wishlistRepository.addProductToWishlist(event.product);
     final state = this.state;

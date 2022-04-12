@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../bloc/product/product_bloc.dart';
 import '../../models/category_model.dart';
 import '../../themes/light_color.dart';
-import '../widgets/popular_products.dart';
+import '../widgets/listview_products.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({Key? key}) : super(key: key);
@@ -20,11 +20,11 @@ class ShopPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: kDefaultPadding),
+          const SizedBox(height: 16),
           _search(),
-          const SizedBox(height: kDefaultPadding),
+          const SizedBox(height: 16),
           _category(),
-          const SizedBox(height: kDefaultPadding),
+          const SizedBox(height: 16),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             //padding: const EdgeInsets.all(kDefaultPadding),
@@ -35,9 +35,21 @@ class ShopPage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 16,
+          ),
           _popularProducts(),
+          const SizedBox(
+            height: 16,
+          ),
           _recommendProducts(),
+          const SizedBox(
+            height: 16,
+          ),
           _newProducts(),
+          const SizedBox(
+            height: 16,
+          ),
         ],
       ),
     );

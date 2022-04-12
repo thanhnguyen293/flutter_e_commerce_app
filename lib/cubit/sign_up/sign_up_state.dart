@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
-import '../../../models/form_inputs/confirmed_password.dart';
-import '../../../models/form_inputs/email.dart';
-import '../../../models/form_inputs/password.dart';
+import '../../models/form_inputs/confirmed_password.dart';
+import '../../models/form_inputs/email.dart';
+import '../../models/form_inputs/password.dart';
 
 enum ConfirmPasswordValidationError { invalid }
 

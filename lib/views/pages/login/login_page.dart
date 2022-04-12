@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../bloc/auth/login/login_cubit.dart';
 import '../../../controller/auth_repository.dart';
+import '../../../cubit/login/login_cubit.dart';
 import 'login_form.dart';
 
 class LoginPage extends StatelessWidget {
