@@ -14,8 +14,8 @@ class LightColor {
 // const Color orange = Color(0xffE65829);
   static const Color red = Color(0xffF72804);
 
-  static const Color lightGrey = Color(0xffE1E2E4);
-  static const Color grey = Color(0xffA1A3A6);
+  static const Color lightGrey = Color(0xFFCED0D5);
+  static const Color grey = Color(0xFFA1A3A6);
   static const Color darkGrey = Color(0xff747F8F);
 
   static const Color iconColor = Color(0xffa8a09b);

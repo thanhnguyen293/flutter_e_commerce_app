@@ -173,14 +173,18 @@ class AuthRepository {
     return _cache.read<User>(key: userCacheKey) ?? User.empty;
   }
 
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp(
+      {required String username,
+      required String email,
+      required String password}) async {
     try {
       firebase_auth.UserCredential authResult;
       authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      UserRepository().uploadUserInfo(email, password, authResult.user!.uid);
+      UserRepository()
+          .uploadUserInfo(username, email, password, authResult.user!.uid);
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../controller/auth_repository.dart';
 import '../../controller/cart/cart_repository.dart';
 import '../../models/cart_model.dart';
 
@@ -9,7 +10,10 @@ part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc() : super(CartLoading()) {
+  final AuthRepository _authenticationRepository;
+  CartBloc({required AuthRepository authenticationRepository})
+      : _authenticationRepository = authenticationRepository,
+        super(CartLoading()) {
     on<LoadCart>(_onLoadCart);
     on<CartUpdate>(_onCartUpdate);
     on<CartProductAdded>(_onCartProductAdded);
@@ -18,9 +22,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
   _onLoadCart(event, emit) {
     emit(CartLoading());
-    final CartRepository _cartRepository = CartRepository();
-    _cartRepository.getCart().listen((cart) {
-      add(CartUpdate(cart));
+
+    _authenticationRepository.user.listen((event) {
+      if (event.isNotEmpty) {
+        final CartRepository _cartRepository = CartRepository();
+        _cartRepository.getCart().listen((cart) {
+          add(CartUpdate(cart));
+        });
+      }
     });
   }
 

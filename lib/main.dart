@@ -7,7 +7,6 @@ import 'package:flutter_e_commerce_app/bloc/category/category_bloc.dart';
 import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
 import 'package:flutter_e_commerce_app/cubit/update_profile/update_password_cubit.dart';
 import 'package:flutter_e_commerce_app/themes/theme.dart';
-import 'package:flutter_e_commerce_app/views/pages/sign_up/sign_up_page.dart';
 
 import '../bloc/bloc_observer.dart';
 import '../controller/auth_repository.dart';
@@ -68,15 +67,21 @@ class MyApp extends StatelessWidget {
               ..add(LoadProducts()),
           ),
           BlocProvider(
-            create: (_) => CartBloc()..add(LoadCart()),
-          ),
-          BlocProvider(
             create: (_) => HomeCubit(),
           ),
           BlocProvider(
             create: (_) => UpdatePasswordCubit(_authenticationRepository),
           ),
-          BlocProvider(create: (_) => WishlistBloc()..add(LoadWishlist()))
+          BlocProvider(
+            create: (_) => WishlistBloc(
+                authenticationRepository: _authenticationRepository)
+              ..add(LoadWishlist()),
+          ),
+          BlocProvider(
+            create: (_) =>
+                CartBloc(authenticationRepository: _authenticationRepository)
+                  ..add(LoadCart()),
+          ),
         ],
         child: const AppView(),
       ),
@@ -108,6 +113,7 @@ class _AppViewState extends State<AppView> {
               case AppStatus.authenticated:
                 {
                   context.read<HomeCubit>().setTab(HomeTab.home);
+
                   _navigator.pushAndRemoveUntil<void>(
                     MainPage.route(),
                     (route) => false,

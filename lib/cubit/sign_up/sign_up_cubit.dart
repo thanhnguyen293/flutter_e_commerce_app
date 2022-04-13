@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_e_commerce_app/models/form_inputs/username.dart';
 import 'package:formz/formz.dart';
 
 import '../../controller/auth_repository.dart';
@@ -11,6 +12,21 @@ class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit(this._authenticationRepository) : super(const SignUpState());
 
   final AuthRepository _authenticationRepository;
+  void userNameChanged(String username) {
+    print(username);
+    final userName = UserName.dirty(username);
+    emit(
+      state.copyWith(
+        username: userName,
+        status: Formz.validate([
+          userName,
+          state.email,
+          state.password,
+          state.confirmedPassword,
+        ]),
+      ),
+    );
+  }
 
   void emailChanged(String value) {
     final email = Email.dirty(value);
@@ -18,6 +34,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       state.copyWith(
         email: email,
         status: Formz.validate([
+          state.username,
           email,
           state.password,
           state.confirmedPassword,
@@ -37,6 +54,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         password: password,
         confirmedPassword: confirmedPassword,
         status: Formz.validate([
+          state.username,
           state.email,
           password,
           confirmedPassword,
@@ -54,6 +72,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       state.copyWith(
         confirmedPassword: confirmedPassword,
         status: Formz.validate([
+          state.username,
           state.email,
           state.password,
           confirmedPassword,
@@ -67,11 +86,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _authenticationRepository.signUp(
+        username: state.username.value,
         email: state.email.value,
         password: state.password.value,
       );
-      //_authenticationRepository.logOut;
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      //_authenticationRepository.logOut();
+      //emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(
         state.copyWith(

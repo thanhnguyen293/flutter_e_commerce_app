@@ -96,7 +96,7 @@ class _PasswordInput extends StatelessWidget {
           key: const Key('loginForm_passwordInput_textField'),
           onChanged: (password) =>
               context.read<LoginCubit>().passwordChanged(password),
-          //obscureText: true,
+          obscureText: true,
           cursorColor: LightColor.kPrimaryColor,
           decoration: AppTheme.inputDecoration.copyWith(
             prefixIcon: const Icon(
@@ -168,8 +168,7 @@ class _SignUpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       key: const Key('loginForm_createAccount_flatButton'),
-      onPressed: () =>
-          Navigator.of(context).pushReplacementNamed(SignUpPage.routeName),
+      onPressed: () => Navigator.of(context).pushNamed(SignUpPage.routeName),
       child: Text(
         'CREATE ACCOUNT',
         // /style: TextStyle(color: theme.primaryColor),

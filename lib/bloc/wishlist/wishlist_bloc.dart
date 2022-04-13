@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app/controller/wishlist/wishlist_repository.dart';
 import 'package:flutter_e_commerce_app/models/product_model.dart';
 
+import '../../controller/auth_repository.dart';
 import '../../models/wishlist.dart';
 
 part 'wishlist_state.dart';
@@ -11,8 +12,11 @@ part 'wishlist_event.dart';
 
 class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   //final WishlistRepository _wishlistRepository;
+  final AuthRepository _authenticationRepository;
 
-  WishlistBloc() : super(WishlistLoading()) {
+  WishlistBloc({required AuthRepository authenticationRepository})
+      : _authenticationRepository = authenticationRepository,
+        super(WishlistLoading()) {
     on<LoadWishlist>(_onLoadWishlist);
     on<WishlistUpdate>(_onWishlistUpdate);
     on<WishlistProductAdded>(_onWishlistProductAdded);
@@ -20,9 +24,13 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   }
   _onLoadWishlist(event, Emitter<WishlistState> emit) async {
     emit(WishlistLoading());
-    final WishlistRepository _wishlistRepository = WishlistRepository();
-    _wishlistRepository.getWishlist().listen((wishlist) {
-      add(WishlistUpdate(wishlist));
+    _authenticationRepository.user.listen((event) {
+      if (event.isNotEmpty) {
+        final WishlistRepository _wishlistRepository = WishlistRepository();
+        _wishlistRepository.getWishlist().listen((wishlist) {
+          add(WishlistUpdate(wishlist));
+        });
+      }
     });
   }
 

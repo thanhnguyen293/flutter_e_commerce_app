@@ -86,7 +86,6 @@ class CartRepository extends BaseCartRepository {
       Map<CartItem, int> map = {
         for (var item in cartItems) item.keys.first: item.values.first
       };
-      print(map);
 
       Cart cart = Cart(cartItems: map);
 

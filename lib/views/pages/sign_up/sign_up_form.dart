@@ -61,29 +61,36 @@ class SignUpForm extends StatelessWidget {
 class _UserNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const TitleText(
-          text: 'Full Name',
-          fontWeight: FontWeight.w700,
-        ),
-        const SizedBox(height: kDefaultPadding / 2),
-        TextField(
-          key: const Key('signUpForm_FullNameInput_textField'),
-          //onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
-          //keyboardType: TextInputType.emailAddress,
-          cursorColor: LightColor.kPrimaryColor,
-          decoration: AppTheme.inputDecoration.copyWith(
-            prefixIcon: const Icon(
-              Icons.person,
-              color: LightColor.kPrimaryColor,
-            ),
-            hintText: 'Full Name',
-          ),
-        ),
-      ],
-    );
+    return BlocBuilder<SignUpCubit, SignUpState>(
+        buildWhen: (previous, current) =>
+            current.username.value != previous.username.value,
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TitleText(
+                text: 'Full Name',
+                fontWeight: FontWeight.w700,
+              ),
+              const SizedBox(height: kDefaultPadding / 2),
+              TextField(
+                key: const Key('signUpForm_FullNameInput_textField'),
+                onChanged: (userName) =>
+                    context.read<SignUpCubit>().userNameChanged(userName),
+                //keyboardType: TextInputType.emailAddress,
+                cursorColor: LightColor.kPrimaryColor,
+                decoration: AppTheme.inputDecoration.copyWith(
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    color: LightColor.kPrimaryColor,
+                  ),
+                  hintText: 'Full Name',
+                  errorText: state.username.invalid ? 'Invalid username' : null,
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
 
@@ -93,6 +100,7 @@ class _EmailInput extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
+        print('Email Rebuil');
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -113,7 +121,7 @@ class _EmailInput extends StatelessWidget {
                   color: LightColor.kPrimaryColor,
                 ),
                 hintText: 'Email',
-                errorText: state.email.invalid ? 'invalid email' : null,
+                errorText: state.email.invalid ? 'Invalid email' : null,
               ),
             ),
           ],
@@ -149,7 +157,7 @@ class _PasswordInput extends StatelessWidget {
                   color: LightColor.kPrimaryColor,
                 ),
                 hintText: 'Password',
-                errorText: state.password.invalid ? 'Password invalid' : null,
+                errorText: state.password.invalid ? 'Invalid password' : null,
               ),
             ),
           ],

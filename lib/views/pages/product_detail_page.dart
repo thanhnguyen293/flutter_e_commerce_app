@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
 import 'package:flutter_e_commerce_app/models/cart_model.dart';
 
@@ -29,6 +30,7 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  int activeIndex = 0;
   double selectedSize = 0;
   Color? selectedColor;
 
@@ -56,7 +58,35 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: Column(
                 children: <Widget>[
                   _appBar(context),
-                  _productImage(),
+                  //_productImage(),
+                  Column(
+                    children: [
+                      CarouselSlider.builder(
+                        itemCount: widget.product.imageUrl.length,
+                        itemBuilder: (BuildContext context, int itemIndex,
+                                int pageViewIndex) =>
+                            Image.network(widget.product.imageUrl[itemIndex]),
+                        //carouselController: buttonCarouselController,
+                        options: CarouselOptions(
+                            autoPlayAnimationDuration:
+                                const Duration(seconds: 1),
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1,
+                            aspectRatio: 2.0,
+                            initialPage: 0,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                activeIndex = index;
+                              });
+                            }),
+                      ),
+                      const SizedBox(
+                        height: kDefaultPadding,
+                      ),
+                      buildIndicator(),
+                    ],
+                  ),
 
                   // _categoryWidget(),
                 ],
@@ -65,7 +95,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             DraggableScrollableSheet(
               maxChildSize: .8,
               initialChildSize: 0.57,
-              minChildSize: .5,
+              minChildSize: .57,
               builder: (ctx, scrollController) {
                 return Container(
                   padding: const EdgeInsets.symmetric(
@@ -129,12 +159,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             },
             child: Container(
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: LightColor.iconColor,
-                  style: BorderStyle.solid,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(13)),
+              decoration: const BoxDecoration(
+                // border: Border.all(
+                //   color: LightColor.iconColor,
+                //   style: BorderStyle.solid,
+                // ),
+                borderRadius: BorderRadius.all(Radius.circular(13)),
                 color: LightColor.bgColor,
               ),
               child: const Icon(Icons.arrow_back_ios_new),
@@ -160,15 +190,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: LightColor.iconColor,
-                        style: state.wishlist.products.contains(widget.product)
-                            ? BorderStyle.none
-                            : BorderStyle.solid,
-                      ),
-                      borderRadius: const BorderRadius.all(Radius.circular(13)),
-                      color: const Color(0xFFFFFFFF),
+                    decoration: const BoxDecoration(
+                      // border: Border.all(
+                      //   color: LightColor.iconColor,
+                      //   style: state.wishlist.products.contains(widget.product)
+                      //       ? BorderStyle.none
+                      //       : BorderStyle.solid,
+                      // ),
+                      borderRadius: BorderRadius.all(Radius.circular(13)),
+                      color: Color(0xFFFFFFFF),
                     ),
                     child: Icon(
                       state.wishlist.products.contains(widget.product)
@@ -231,25 +261,36 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget _productImage() {
-    return CarouselSlider.builder(
-      itemCount: widget.product.imageUrl.length,
-      itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
-          Image.network(widget.product.imageUrl[itemIndex]),
-      options: CarouselOptions(
-        autoPlayAnimationDuration: const Duration(seconds: 1),
-        autoPlay: true,
-        enlargeCenterPage: true,
-        viewportFraction: 1,
-        aspectRatio: 2.0,
-        initialPage: 0,
-      ),
-    );
-    // return SizedBox(
-    //   height: 300,
-    //   child: Center(child: Image.network(widget.product.imageUrl)),
-    // );
-  }
+  // Widget _productImage() {
+  //   return CarouselSlider.builder(
+  //     itemCount: widget.product.imageUrl.length,
+  //     itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+  //         Image.network(widget.product.imageUrl[itemIndex]),
+  //     options: CarouselOptions(
+  //       autoPlayAnimationDuration: const Duration(seconds: 1),
+  //       autoPlay: true,
+  //       enlargeCenterPage: true,
+  //       viewportFraction: 1,
+  //       aspectRatio: 2.0,
+  //       initialPage: 0,
+  //     ),
+  //   );
+  //   // return SizedBox(
+  //   //   height: 300,
+  //   //   child: Center(child: Image.network(widget.product.imageUrl)),
+  //   // );
+  // }
+  Widget buildIndicator() => AnimatedSmoothIndicator(
+        effect: const ExpandingDotsEffect(
+          dotHeight: 4,
+          dotWidth: 20,
+          spacing: 4,
+          dotColor: LightColor.lightGrey,
+          activeDotColor: LightColor.grey,
+        ),
+        activeIndex: activeIndex,
+        count: widget.product.imageUrl.length,
+      );
 
   Widget _availableSize() {
     return Column(

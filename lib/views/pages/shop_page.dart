@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_e_commerce_app/bloc/category/category_bloc.dart';
 import 'package:flutter_e_commerce_app/themes/constants.dart';
 import 'package:flutter_e_commerce_app/models/product_model.dart';
+import 'package:flutter_e_commerce_app/themes/theme.dart';
 import 'package:flutter_e_commerce_app/views/widgets/product_card.dart';
+import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../bloc/product/product_bloc.dart';
@@ -21,9 +23,10 @@ class ShopPage extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 16),
-          _search(),
-          const SizedBox(height: 16),
-          _category(),
+          _search(context),
+          //buildFilter(context),
+          // const SizedBox(height: 16),
+          // _category(),
           const SizedBox(height: 16),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -124,7 +127,7 @@ class ShopPage extends StatelessWidget {
     );
   }
 
-  Container _search() {
+  Container _search(BuildContext context) {
     return Container(
       height: 55,
       margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -145,7 +148,9 @@ class ShopPage extends StatelessWidget {
             width: 45,
             // height: 10,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _showFilter(context);
+              },
               style: ElevatedButton.styleFrom(
                   primary: LightColor.kPrimaryColor,
                   shape: RoundedRectangleBorder(
@@ -160,6 +165,152 @@ class ShopPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showFilter(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    // isScrollControlled: true, // set this to true
+    builder: (_) {
+      return DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.9,
+        minChildSize: 0.9,
+        builder: (_, controller) {
+          return Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(kDefaultRadius),
+                topRight: Radius.circular(kDefaultRadius),
+              ),
+              color: LightColor.bgColor,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const TitleText(
+                        text: 'Clear',
+                        color: LightColor.kPrimaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const TitleText(
+                      text: 'Filters',
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const TitleText(
+                        text: 'Cancel',
+                        color: LightColor.kPrimaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                  //color: Colors.black,
+                ),
+                const SizedBox(
+                  height: kDefaultPadding / 2,
+                ),
+                const TitleText(
+                  text: 'Category',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+                const SizedBox(height: kDefaultPadding),
+                SizedBox(
+                  width: AppTheme.fullWidth(context),
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                        //width: 200,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const TitleText(
+                            text: 'New Products',
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            primary: LightColor.kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: kDefaultPadding),
+                      SizedBox(
+                        height: 20,
+                        //width: 200,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const TitleText(
+                            text: 'Popular Products',
+                            color: LightColor.titleTextColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            primary: LightColor.kPrimaryLightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: kDefaultPadding),
+                      SizedBox(
+                        height: 20,
+                        //width: 200,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const TitleText(
+                            text: 'Trending Products',
+                            color: LightColor.titleTextColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            primary: LightColor.kPrimaryLightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
 }
 
 Widget _category() {

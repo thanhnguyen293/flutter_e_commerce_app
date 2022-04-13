@@ -9,6 +9,7 @@ import '../../../views/pages/edit_profile/edit_profile_page.dart';
 import '../../../views/widgets/title_text.dart';
 import '../../bloc/app/app_bloc.dart';
 import '../../bloc/app/app_event.dart';
+import '../../bloc/app/app_state.dart';
 import '../../controller/user_repository.dart';
 import '../widgets/profile_image.dart';
 import '../widgets/profile_menu.dart';
@@ -24,19 +25,28 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         child: Column(
           children: [
-            const SizedBox(
-              height: kDefaultPadding,
+            const SizedBox(height: kDefaultPadding),
+
+            BlocBuilder<AppBloc, AppState>(
+              builder: (context, state) {
+                if (state.status == AppStatus.authenticated) {
+                  return Column(
+                    children: const [
+                      ProfileImage(),
+                      SizedBox(height: kDefaultPadding / 2),
+                      GetUserName(),
+                      GetEmail(),
+                    ],
+                  );
+                }
+                return SizedBox();
+              },
             ),
-            const ProfileImage(),
-            // UserImage(context: context),
-            const SizedBox(
-              height: kDefaultPadding / 2,
-            ),
-            const GetUserName(),
-            const GetEmail(),
-            const SizedBox(
-              height: kDefaultPadding,
-            ),
+            // const ProfileImage(),
+            // const SizedBox(height: kDefaultPadding / 2),
+            // const GetUserName(),
+            // const GetEmail(),
+            const SizedBox(height: kDefaultPadding),
             ProfileMenu(
               icon: Icons.account_circle,
               press: () {
@@ -78,7 +88,6 @@ class ProfilePage extends StatelessWidget {
               },
               title: 'Log Out',
             ),
-
             const SizedBox(
               height: kDefaultPadding,
             ),

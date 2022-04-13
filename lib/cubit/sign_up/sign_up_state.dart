@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_e_commerce_app/models/form_inputs/username.dart';
 import 'package:formz/formz.dart';
 
 import '../../models/form_inputs/confirmed_password.dart';
@@ -9,14 +10,14 @@ enum ConfirmPasswordValidationError { invalid }
 
 class SignUpState extends Equatable {
   const SignUpState({
-    // this.username,
+    this.username = const UserName.pure(),
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.confirmedPassword = const ConfirmedPassword.pure(),
     this.status = FormzStatus.pure,
     this.errorMessage,
   });
-  // final String? username;
+  final UserName username;
   final Email email;
   final Password password;
   final ConfirmedPassword confirmedPassword;
@@ -24,9 +25,11 @@ class SignUpState extends Equatable {
   final String? errorMessage;
 
   @override
-  List<Object> get props => [email, password, confirmedPassword, status];
+  List<Object> get props =>
+      [username, email, password, confirmedPassword, status];
 
   SignUpState copyWith({
+    UserName? username,
     Email? email,
     Password? password,
     ConfirmedPassword? confirmedPassword,
@@ -34,7 +37,7 @@ class SignUpState extends Equatable {
     String? errorMessage,
   }) {
     return SignUpState(
-      //username: username ?? username,
+      username: username ?? this.username,
       email: email ?? this.email,
       password: password ?? this.password,
       confirmedPassword: confirmedPassword ?? this.confirmedPassword,
