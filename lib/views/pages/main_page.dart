@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../cubit/bottom_nav_bar/home_cubit.dart';
 import '../../cubit/bottom_nav_bar/home_state.dart';
 import '../../themes/light_color.dart';
-import 'favorite_page.dart';
+import 'favorites_page.dart';
 import 'profile_page.dart';
 import 'cart_page.dart';
 import 'shop_page.dart';

@@ -1,4 +1,4 @@
-# flutter_e_commerce_app
+<!-- # flutter_e_commerce_app
 
 A new Flutter project.
 
@@ -13,4 +13,12 @@ A few resources to get you started if this is your first Flutter project:
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+samples, guidance on mobile development, and a full API reference. -->
+
+| Login Page                 |   Sign Up Page    |  Shop Page | 
+|:---:|:---:|:---:|
+![](./screenshots/login_page.png)|![](./screenshots/sign_up_page.png)|![](./screenshots/shop_page.png)|
+
+Product Detail Page | Favorites Page | Cart Page | Profile Page |
+|:---:|:---:|:---:|:---:|
+|![](./screenshots/product_detail_page.png)|![](./screenshots/favorites_page.png)|![](./screenshots/cart_page.png)|![](./screenshots/profile_page.png)|
