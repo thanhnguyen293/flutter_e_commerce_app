@@ -1,24 +1,20 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/bloc/category/category_bloc.dart';
-import 'package:flutter_e_commerce_app/themes/constants.dart';
-import 'package:flutter_e_commerce_app/models/product_model.dart';
-import 'package:flutter_e_commerce_app/themes/theme.dart';
-import 'package:flutter_e_commerce_app/views/widgets/product_card.dart';
-import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../bloc/category/category_bloc.dart';
+import '../../themes/constants.dart';
+import '../../views/widgets/title_text.dart';
 import '../../bloc/product/product_bloc.dart';
-import '../../models/category_model.dart';
 import '../../themes/light_color.dart';
-import '../widgets/listview_products.dart';
+import '../widgets/list_view_products.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -26,15 +22,21 @@ class ShopPage extends StatelessWidget {
           _search(context),
           //buildFilter(context),
           // const SizedBox(height: 16),
-          // _category(),
-          const SizedBox(height: 16),
+          //_category(),
+          const SizedBox(height: kDefaultPadding),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             //padding: const EdgeInsets.all(kDefaultPadding),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(kDefaultRadius / 2),
-              child: Image.network(
-                'https://i.imgur.com/4hwmteh.jpeg',
+              child: CarouselSlider(
+                options: CarouselOptions(autoPlay: true),
+                items: [
+                  Image.network(
+                    'https://i.imgur.com/4hwmteh.jpeg',
+                    fit: BoxFit.cover,
+                  ),
+                ],
               ),
             ),
           ),
@@ -168,147 +170,168 @@ class ShopPage extends StatelessWidget {
 }
 
 void _showFilter(BuildContext context) {
+  var selectedCategory = '';
+  var selectedRange = const RangeValues(0, 0.8);
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
     // isScrollControlled: true, // set this to true
     builder: (_) {
-      return DraggableScrollableSheet(
-        expand: false,
-        initialChildSize: 0.9,
-        minChildSize: 0.9,
-        builder: (_, controller) {
-          return Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(kDefaultRadius),
-                topRight: Radius.circular(kDefaultRadius),
+      return StatefulBuilder(builder: (context, setState) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.9,
+          minChildSize: 0.9,
+          builder: (_, controller) {
+            return Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(kDefaultRadius),
+                  topRight: Radius.circular(kDefaultRadius),
+                ),
+                color: LightColor.bgColor,
               ),
-              color: LightColor.bgColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const TitleText(
-                        text: 'Clear',
-                        color: LightColor.kPrimaryColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const TitleText(
-                      text: 'Filters',
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const TitleText(
-                        text: 'Cancel',
-                        color: LightColor.kPrimaryColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 1,
-                  //color: Colors.black,
-                ),
-                const SizedBox(
-                  height: kDefaultPadding / 2,
-                ),
-                const TitleText(
-                  text: 'Category',
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
-                const SizedBox(height: kDefaultPadding),
-                SizedBox(
-                  width: AppTheme.fullWidth(context),
-                  height: 50,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: 20,
-                        //width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const TitleText(
-                            text: 'New Products',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            primary: LightColor.kPrimaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const TitleText(
+                          text: 'Clear',
+                          color: LightColor.kPrimaryColor,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(width: kDefaultPadding),
-                      SizedBox(
-                        height: 20,
-                        //width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const TitleText(
-                            text: 'Popular Products',
-                            color: LightColor.titleTextColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            primary: LightColor.kPrimaryLightColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
+                      const TitleText(
+                        text: 'Filters',
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
                       ),
-                      const SizedBox(width: kDefaultPadding),
-                      SizedBox(
-                        height: 20,
-                        //width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const TitleText(
-                            text: 'Trending Products',
-                            color: LightColor.titleTextColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            primary: LightColor.kPrimaryLightColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const TitleText(
+                          text: 'Cancel',
+                          color: LightColor.kPrimaryColor,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
+                  const Divider(
+                    thickness: 1,
+                    //color: Colors.black,
+                  ),
+                  const SizedBox(
+                    height: kDefaultPadding / 2,
+                  ),
+                  const TitleText(
+                    text: 'Category',
+                    fontSize: 20,
+                    //fontWeight: FontWeight.w700,
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  BlocBuilder<CategoryBloc, CategoryState>(
+                    builder: (context, state) {
+                      if (state is CategoryLoading) {
+                        return const Center(
+                          child: Text('Categories Loading...'),
+                        );
+                      }
+                      if (state is CategoryLoaded) {
+                        return SizedBox(
+                          //color: kPrimaryLightColor,
+                          height: 50,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: state.categories.map((category) {
+                              return Container(
+                                height: 20,
+                                //width: 200,
+                                padding: const EdgeInsets.only(
+                                    right: kDefaultPadding / 2),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(
+                                        () => selectedCategory = category.name);
+                                  },
+                                  child: TitleText(
+                                    text: category.name,
+                                    color: selectedCategory == category.name
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    primary: selectedCategory == category.name
+                                        ? LightColor.kPrimaryColor
+                                        : LightColor.kPrimaryLightColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          kDefaultRadius / 2),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      } else {
+                        return const Text('Something went wrong');
+                      }
+                    },
+                  ),
+                  const SizedBox(height: kDefaultPadding),
+                  const TitleText(
+                    text: 'Pricing',
+                    fontSize: 20,
+                  ),
+                  RangeSlider(
+                    activeColor: LightColor.kPrimaryColor,
+                    labels: RangeLabels(
+                        '${selectedRange.start}', '${selectedRange.end}'),
+                    onChanged: (RangeValues newRange) {
+                      setState(() => selectedRange = newRange);
+                    },
+                    //divisions: ,
+                    values: selectedRange,
+                  ),
+                  const Spacer(),
+                  SafeArea(
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 200,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const TitleText(
+                            text: 'Apply Filter',
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: LightColor.kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultRadius),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      });
     },
   );
 }
