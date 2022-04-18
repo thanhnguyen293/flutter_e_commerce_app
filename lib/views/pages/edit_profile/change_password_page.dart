@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/controller/auth_repository.dart';
-import 'package:flutter_e_commerce_app/cubit/update_profile/update_password_cubit.dart';
-import 'package:flutter_e_commerce_app/models/form_inputs/password.dart';
+import 'package:flutter_e_commerce_app/cubit/update_password/update_password_cubit.dart';
 import 'package:flutter_e_commerce_app/themes/constants.dart';
 import 'package:flutter_e_commerce_app/themes/theme.dart';
 import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';

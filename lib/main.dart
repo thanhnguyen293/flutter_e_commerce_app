@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_e_commerce_app/cubit/bottom_nav_bar/home_cubit.dart';
-import 'package:flutter_e_commerce_app/cubit/bottom_nav_bar/home_state.dart';
-import 'package:flutter_e_commerce_app/bloc/category/category_bloc.dart';
-import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
-import 'package:flutter_e_commerce_app/cubit/update_profile/update_password_cubit.dart';
-import 'package:flutter_e_commerce_app/themes/theme.dart';
 
+import '../../cubit/bottom_nav_bar/home_cubit.dart';
+import '../../cubit/bottom_nav_bar/home_state.dart';
+import '../../bloc/category/category_bloc.dart';
+import '../../bloc/wishlist/wishlist_bloc.dart';
+import '../../cubit/update_password/update_password_cubit.dart';
+import '../../themes/theme.dart';
 import '../bloc/bloc_observer.dart';
 import '../controller/auth_repository.dart';
 import 'bloc/app/app_bloc.dart';
 import 'bloc/app/app_state.dart';
 import 'bloc/cart/cart_bloc.dart';
 import 'config/app_router.dart';
-
 import 'bloc/product/product_bloc.dart';
 import 'controller/category/category_repository.dart';
 import 'controller/product/product_repository.dart';

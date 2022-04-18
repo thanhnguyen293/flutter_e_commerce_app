@@ -4,6 +4,16 @@
 
 Ứng dụng e-commerce đơn giản được tạo ra trong quá trình học flutter của tôi. Không có backend riêng, chỉ sử dụng firebase.
 
+## Feature
+- [x] Đăng kí tài khoản, đăng nhập, đăng xuất, thay đổi password.
+- [x] Thêm, xoá sản phẩm khỏi danh sách sản phẩm yêu thích.
+- [x] Các chức năng của giỏ hàng(thêm, xoá, tăng số lượng sản phẩm trong giỏ hàng,...)
+- [x] Đồng bộ realtime dữ liệu từ app lên firebase .
+
+## Todo
+- [x] Tìm kiếm sản phẩm, lọc sản phẩm.
+- [x] Darkmode.
+- [x] Thông báo.
 
 ## IOS Screenshots
 | Login Page                 |   Sign Up Page    |  Shop Page | 
@@ -18,11 +28,11 @@ Product Detail Page | Favorites Page | Cart Page | Profile Page |
 
 | Login Page                 |   Sign Up Page    |  Shop Page | 
 |:---:|:---:|:---:|
-![](./screenshots/login_page.png)|![](./screenshots/sign_up_page.png)|![](./screenshots/shop_page.png)|
+![](./screenshots/login_page_android.png)|![](./screenshots/sign_up_page_android.png)|![](./screenshots/shop_page_android.png)|
 
 Product Detail Page | Favorites Page | Cart Page | Profile Page |
 |:---:|:---:|:---:|:---:|
-|![](./screenshots/product_detail_page.png)|![](./screenshots/favorites_page.png)|![](./screenshots/cart_page.png)|![](./screenshots/profile_page.png)|
+|![](./screenshots/product_detail_page_android.png)|![](./screenshots/favorites_page_android.png)|![](./screenshots/cart_page_android.png)|![](./screenshots/profile_page_android.png)|
 
 ## Directory Structure
 
