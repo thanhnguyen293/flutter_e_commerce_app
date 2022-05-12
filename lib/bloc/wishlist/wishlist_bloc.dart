@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/controller/wishlist/wishlist_repository.dart';
-import 'package:flutter_e_commerce_app/models/product_model.dart';
 
+import '../../controller/wishlist/wishlist_repository.dart';
+import '../../models/product_model.dart';
 import '../../controller/auth_repository.dart';
 import '../../models/wishlist.dart';
 

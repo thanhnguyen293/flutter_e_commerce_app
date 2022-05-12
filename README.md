@@ -91,7 +91,7 @@ lib
 │   ├── sign_up
 │   │   ├── sign_up_cubit.dart
 │   │   └── sign_up_state.dart
-│   └── update_profile
+│   └── update_password
 │       ├── update_password_cubit.dart
 │       └── update_password_state.dart
 ├── generated_plugin_registrant.dart

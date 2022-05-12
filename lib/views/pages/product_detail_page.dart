@@ -2,11 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_e_commerce_app/bloc/wishlist/wishlist_bloc.dart';
-import 'package:flutter_e_commerce_app/models/cart_model.dart';
 
-import 'package:flutter_e_commerce_app/themes/constants.dart';
-
+import '../../bloc/wishlist/wishlist_bloc.dart';
+import '../../models/cart_model.dart';
+import '../../themes/constants.dart';
 import '../../bloc/cart/cart_bloc.dart';
 import '../../models/product_model.dart';
 import '../../themes/light_color.dart';

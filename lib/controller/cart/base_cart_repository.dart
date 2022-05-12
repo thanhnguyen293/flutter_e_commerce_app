@@ -1,4 +1,4 @@
-import 'package:flutter_e_commerce_app/models/cart_model.dart';
+import '../../models/cart_model.dart';
 
 abstract class BaseCartRepository {
   Stream<Cart> getCart();

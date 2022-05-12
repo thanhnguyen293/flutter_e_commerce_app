@@ -8,21 +8,36 @@ import 'light_color.dart';
 class AppTheme {
   const AppTheme();
 
-  static InputDecoration inputDecoration = InputDecoration(
-    contentPadding: const EdgeInsets.symmetric(
-        horizontal: kDefaultPadding, vertical: kDefaultRadius * 0.8),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
-      borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 2),
+  static InputDecoration inputDecoration = const InputDecoration(
+    // contentPadding: EdgeInsets.symmetric(
+    //     horizontal: kDefaultPadding, vertical: kDefaultRadius * 0.8),
+    border: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Color(0x5B3C3C43),
+      ),
     ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
-      borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 2),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Color(0x5B3C3C43),
+      ),
     ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
-      borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 1.5),
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Color(0x5B3C3C43),
+      ),
     ),
+    // border: OutlineInputBorder(
+    //   borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
+    //   borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 2),
+    // ),
+    // focusedBorder: OutlineInputBorder(
+    //   borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
+    //   borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 2),
+    // ),
+    // enabledBorder: OutlineInputBorder(
+    //   borderRadius: BorderRadius.circular(kDefaultRadius * 0.75),
+    //   borderSide: const BorderSide(color: LightColor.kPrimaryColor, width: 1.5),
+    // ),
   );
 
   static ButtonStyle textButtonStyle = TextButton.styleFrom(

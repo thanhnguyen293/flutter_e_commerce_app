@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce_app/views/pages/edit_profile/change_password_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/edit_profile/edit_profile_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/edit_profile/personal_infomation_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/main_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/product_detail_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/sign_up/sign_up_page.dart';
 
+import '../../views/pages/edit_profile/change_password_page.dart';
+import '../../views/pages/edit_profile/edit_profile_page.dart';
+import '../../views/pages/edit_profile/personal_information_page.dart';
+import '../../views/pages/main_page.dart';
+import '../../views/pages/product_detail_page.dart';
+import '../../views/pages/sign_up/sign_up_page.dart';
 import '../models/product_model.dart';
 import '../views/pages/login/login_page.dart';
 

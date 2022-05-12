@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app/views/pages/edit_profile/change_password_page.dart';
-import 'package:flutter_e_commerce_app/views/pages/edit_profile/personal_infomation_page.dart';
+import 'package:flutter_e_commerce_app/views/pages/edit_profile/personal_information_page.dart';
 import 'package:flutter_e_commerce_app/views/pages/product_detail_page.dart';
 import 'package:flutter_e_commerce_app/views/widgets/profile_menu.dart';
 

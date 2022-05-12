@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/themes/constants.dart';
 
+import '../../themes/constants.dart';
 import '../../bloc/cart/cart_bloc.dart';
 import '../../themes/light_color.dart';
 import '../../themes/theme.dart';

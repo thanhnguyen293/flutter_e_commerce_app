@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/views/pages/sign_up/sign_up_form.dart';
 
+import '../../../views/pages/sign_up/sign_up_form.dart';
 import '../../../cubit/sign_up/sign_up_cubit.dart';
 import '../../../controller/auth_repository.dart';
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/themes/constants.dart';
-import 'package:flutter_e_commerce_app/themes/theme.dart';
-import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 
+import '../../../themes/constants.dart';
+import '../../../themes/theme.dart';
+import '../../../views/widgets/title_text.dart';
 import '../../../cubit/sign_up/sign_up_cubit.dart';
 import '../../../cubit/sign_up/sign_up_state.dart';
 import '../../../themes/light_color.dart';
@@ -29,29 +30,53 @@ class SignUpForm extends StatelessWidget {
             );
         }
       },
-      child: Align(
-        //alignment: const Alignment(6, 1),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                //_UsernameInput(),
-                const TitleText(text: 'SIGN UP'),
-                const SizedBox(height: kDefaultPadding * 2),
-                _UserNameInput(),
-                const SizedBox(height: kDefaultPadding),
-                _EmailInput(),
-                const SizedBox(height: kDefaultPadding),
-                _PasswordInput(),
-                const SizedBox(height: kDefaultPadding),
-                _ConfirmPasswordInput(),
-                const SizedBox(height: kDefaultPadding * 2),
-                _SignUpButton(),
-              ],
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color(0xFFf57a50),
+        ),
+        child: Stack(
+          children: [
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset('assets/images/sign_up.png'),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: LightColor.bgColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 36),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //_UsernameInput(),
+                        const TitleText(text: 'SIGN UP'),
+                        const SizedBox(height: kDefaultPadding * 2),
+                        _UserNameInput(),
+                        const SizedBox(height: kDefaultPadding),
+                        _EmailInput(),
+                        const SizedBox(height: kDefaultPadding),
+                        _PasswordInput(),
+                        const SizedBox(height: kDefaultPadding),
+                        _ConfirmPasswordInput(),
+                        const SizedBox(height: kDefaultPadding * 2),
+                        _SignUpButton(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -100,7 +125,6 @@ class _EmailInput extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
-        print('Email Rebuil');
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

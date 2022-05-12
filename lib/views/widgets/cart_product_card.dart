@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_e_commerce_app/models/cart_model.dart';
-import 'package:flutter_e_commerce_app/themes/constants.dart';
-import 'package:flutter_e_commerce_app/themes/light_color.dart';
-import 'package:flutter_e_commerce_app/views/widgets/title_text.dart';
 
+import '../../models/cart_model.dart';
+import '../../themes/constants.dart';
+import '../../themes/light_color.dart';
+import '../../views/widgets/title_text.dart';
 import '../../bloc/cart/cart_bloc.dart';
 
 class CartProductCard extends StatelessWidget {

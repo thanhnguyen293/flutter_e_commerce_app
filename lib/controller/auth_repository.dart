@@ -81,8 +81,6 @@ class ChangePasswordFailure implements Exception {
   final String message;
 
   factory ChangePasswordFailure.fromCode(String code) {
-    print(' ChangePasswordFailure.fromCode');
-    print(code);
     switch (code) {
       case 'wrong-password':
         return const ChangePasswordFailure(

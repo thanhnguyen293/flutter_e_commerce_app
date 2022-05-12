@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_e_commerce_app/models/cart_model.dart';
-import 'package:flutter_e_commerce_app/models/product_model.dart';
 
+import '../../models/cart_model.dart';
 import '../../controller/cart/base_cart_repository.dart';
 
 class CartRepository extends BaseCartRepository {

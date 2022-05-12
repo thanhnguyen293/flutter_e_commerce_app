@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app/themes/light_color.dart';
 
 import '../../../controller/auth_repository.dart';
 import '../../../cubit/login/login_cubit.dart';
@@ -20,14 +21,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //     title: const Text(
-      //   'Login',
-      //   style: TextStyle(color: Colors.black),
-      // )),
       body: BlocProvider(
         create: (_) => LoginCubit(context.read<AuthRepository>()),
-        child: const LoginForm(),
+        child: LoginForm(),
       ),
     );
   }

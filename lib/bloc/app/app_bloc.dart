@@ -5,6 +5,7 @@ import 'package:very_good_analysis/very_good_analysis.dart';
 
 import '../../controller/auth_repository.dart';
 import '../../models/user_model.dart';
+
 import 'app_event.dart';
 import 'app_state.dart';
 
