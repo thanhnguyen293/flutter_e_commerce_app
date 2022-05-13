@@ -49,74 +49,72 @@ class LoginForm extends StatelessWidget {
               initialChildSize: 0.7,
               minChildSize: 0.7,
               builder: (ctx, scrollController) {
-                return Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    //height: MediaQuery.of(context).size.height * 0.8,
-                    decoration: const BoxDecoration(
-                        color: LightColor.bgColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
-                        )),
-                    child: SingleChildScrollView(
-                      //physics: NeverScrollableScrollPhysics(),
-                      controller: scrollController,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 36),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(height: 30),
-                            const Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 34,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(height: 32),
-                            _EmailInput(),
-                            const SizedBox(height: 32),
-                            _PasswordInput(),
-                            const SizedBox(height: 20),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: InkWell(
-                                onTap: () {},
-                                child: const TitleText(
-                                  text: 'Need help?',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Color(0x99200A4D),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            _LoginButton(),
-                            const SizedBox(height: 32),
-                            const TitleText(
-                              text: 'Or Login With',
+                return Container(
+                  //height: MediaQuery.of(context).size.height * 0.8,
+                  decoration: const BoxDecoration(
+                      color: LightColor.bgColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(32),
+                        topRight: Radius.circular(32),
+                      )),
+                  child: SingleChildScrollView(
+                    //physics: NeverScrollableScrollPhysics(),
+                    controller: scrollController,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 36),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: 30),
+                          const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 34,
                               fontWeight: FontWeight.w700,
-                              fontSize: 13,
-                              color: Color(0x99200A4D),
+                              fontFamily: 'SF Pro',
                             ),
-                            const SizedBox(height: 28),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                _GoogleLoginButton(),
-                                SizedBox(width: 24),
-                                _FacebookLoginButton(),
-                                SizedBox(width: 24),
-                                _AppleLoginButton()
-                              ],
+                          ),
+                          const SizedBox(height: 32),
+                          _EmailInput(),
+                          const SizedBox(height: 32),
+                          _PasswordInput(),
+                          const SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              onTap: () {},
+                              child: const TitleText(
+                                text: 'Need help?',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13,
+                                color: Color(0x99200A4D),
+                              ),
                             ),
-                            const SizedBox(height: 28),
-                            _SignUpButton(),
-                            const SizedBox(height: 39)
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 20),
+                          _LoginButton(),
+                          const SizedBox(height: 32),
+                          const TitleText(
+                            text: 'Or Login With',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                            color: Color(0x99200A4D),
+                          ),
+                          const SizedBox(height: 28),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              _GoogleLoginButton(),
+                              SizedBox(width: 24),
+                              _FacebookLoginButton(),
+                              SizedBox(width: 24),
+                              _AppleLoginButton()
+                            ],
+                          ),
+                          const SizedBox(height: 28),
+                          _SignUpButton(),
+                          const SizedBox(height: 39)
+                        ],
                       ),
                     ),
                   ),
@@ -271,9 +269,11 @@ class _LoginButton extends StatelessWidget {
 
                 // ),
                 style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 child: Container(
                   width: double.infinity,
                   height: 68,
@@ -377,12 +377,15 @@ class _SignUpButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Newbie? ',
+        const TitleText(
+          text: 'Newbie? ',
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
           // /style: TextStyle(color: theme.primaryColor),
         ),
         InkWell(
-          onTap: () => Navigator.of(context).pushNamed(SignUpPage.routeName),
+          onTap: () =>
+              Navigator.of(context).pushReplacementNamed(SignUpPage.routeName),
           child: const TitleText(
             text: 'Create Account',
             color: LightColor.kPrimaryColor,

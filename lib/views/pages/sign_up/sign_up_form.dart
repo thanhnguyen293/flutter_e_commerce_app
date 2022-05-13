@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerce_app/views/pages/login/login_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 
@@ -31,7 +32,7 @@ class SignUpForm extends StatelessWidget {
         }
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFFf57a50),
         ),
         child: Stack(
@@ -42,42 +43,122 @@ class SignUpForm extends StatelessWidget {
                 child: Image.asset('assets/images/sign_up.png'),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: LightColor.bgColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 36),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        //_UsernameInput(),
-                        const TitleText(text: 'SIGN UP'),
-                        const SizedBox(height: kDefaultPadding * 2),
-                        _UserNameInput(),
-                        const SizedBox(height: kDefaultPadding),
-                        _EmailInput(),
-                        const SizedBox(height: kDefaultPadding),
-                        _PasswordInput(),
-                        const SizedBox(height: kDefaultPadding),
-                        _ConfirmPasswordInput(),
-                        const SizedBox(height: kDefaultPadding * 2),
-                        _SignUpButton(),
-                      ],
+            DraggableScrollableSheet(
+              initialChildSize: 0.7,
+              minChildSize: 0.7,
+              maxChildSize: 0.9,
+              builder: (context, scrollController) {
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: LightColor.bgColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(32),
+                      topRight: Radius.circular(32),
                     ),
                   ),
-                ),
-              ),
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 36),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              fontSize: 34,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'SF Pro',
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          _UserNameInput(),
+                          const SizedBox(height: kDefaultPadding),
+                          _EmailInput(),
+                          const SizedBox(height: kDefaultPadding),
+                          _PasswordInput(),
+                          const SizedBox(height: kDefaultPadding),
+                          _ConfirmPasswordInput(),
+                          const SizedBox(height: 17),
+                          const _TermAndServices(),
+                          const SizedBox(height: 14),
+                          _SignUpButton(),
+                          const SizedBox(height: 22),
+                          const _LoginButton(),
+                          const SizedBox(height: 29),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const TitleText(
+          text: 'Existing User? ',
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+          },
+          child: const TitleText(
+            text: 'Log In',
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: LightColor.kPrimaryColor,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class _TermAndServices extends StatelessWidget {
+  const _TermAndServices({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Row(
+        children: [
+          const TitleText(
+            text: 'Yes, I agree to the ',
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          InkWell(
+              onTap: () {},
+              child: const Text(
+                'Terms & Services.',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              )),
+        ],
       ),
     );
   }
@@ -95,7 +176,8 @@ class _UserNameInput extends StatelessWidget {
             children: [
               const TitleText(
                 text: 'Full Name',
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w400,
+                fontSize: 13,
               ),
               const SizedBox(height: kDefaultPadding / 2),
               TextField(
@@ -105,12 +187,18 @@ class _UserNameInput extends StatelessWidget {
                 //keyboardType: TextInputType.emailAddress,
                 cursorColor: LightColor.kPrimaryColor,
                 decoration: AppTheme.inputDecoration.copyWith(
-                  prefixIcon: const Icon(
-                    Icons.person,
-                    color: LightColor.kPrimaryColor,
-                  ),
                   hintText: 'Full Name',
                   errorText: state.username.invalid ? 'Invalid username' : null,
+                  suffixIcon: state.username.pure
+                      ? const SizedBox()
+                      : SvgPicture.asset(
+                          state.username.invalid
+                              ? 'assets/icons/verification_error_icon.svg'
+                              : 'assets/icons/verified_icon.svg',
+                          fit: BoxFit.scaleDown,
+                          height: 14,
+                          width: 14,
+                        ),
                 ),
               ),
             ],
@@ -130,7 +218,8 @@ class _EmailInput extends StatelessWidget {
           children: [
             const TitleText(
               text: 'Email',
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
             ),
             const SizedBox(height: kDefaultPadding / 2),
             TextField(
@@ -140,11 +229,17 @@ class _EmailInput extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               cursorColor: LightColor.kPrimaryColor,
               decoration: AppTheme.inputDecoration.copyWith(
-                prefixIcon: const Icon(
-                  Icons.email,
-                  color: LightColor.kPrimaryColor,
-                ),
                 hintText: 'Email',
+                suffixIcon: state.email.pure
+                    ? const SizedBox()
+                    : SvgPicture.asset(
+                        state.email.invalid
+                            ? 'assets/icons/verification_error_icon.svg'
+                            : 'assets/icons/verified_icon.svg',
+                        fit: BoxFit.scaleDown,
+                        height: 14,
+                        width: 14,
+                      ),
                 errorText: state.email.invalid ? 'Invalid email' : null,
               ),
             ),
@@ -166,7 +261,8 @@ class _PasswordInput extends StatelessWidget {
           children: [
             const TitleText(
               text: 'Password',
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
             ),
             const SizedBox(height: kDefaultPadding / 2),
             TextField(
@@ -176,12 +272,18 @@ class _PasswordInput extends StatelessWidget {
               obscureText: true,
               cursorColor: LightColor.kPrimaryColor,
               decoration: AppTheme.inputDecoration.copyWith(
-                prefixIcon: const Icon(
-                  Icons.lock,
-                  color: LightColor.kPrimaryColor,
-                ),
                 hintText: 'Password',
                 errorText: state.password.invalid ? 'Invalid password' : null,
+                suffixIcon: state.password.pure
+                    ? const SizedBox()
+                    : SvgPicture.asset(
+                        state.password.invalid
+                            ? 'assets/icons/verification_error_icon.svg'
+                            : 'assets/icons/verified_icon.svg',
+                        fit: BoxFit.scaleDown,
+                        height: 14,
+                        width: 14,
+                      ),
               ),
             ),
           ],
@@ -204,7 +306,8 @@ class _ConfirmPasswordInput extends StatelessWidget {
           children: [
             const TitleText(
               text: 'Confirm Password',
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
             ),
             const SizedBox(height: kDefaultPadding / 2),
             TextField(
@@ -215,14 +318,20 @@ class _ConfirmPasswordInput extends StatelessWidget {
               obscureText: true,
               cursorColor: LightColor.kPrimaryColor,
               decoration: AppTheme.inputDecoration.copyWith(
-                prefixIcon: const Icon(
-                  Icons.lock,
-                  color: LightColor.kPrimaryColor,
-                ),
                 hintText: 'Confirm password',
                 errorText: state.confirmedPassword.invalid
                     ? 'Passwords do not match'
                     : null,
+                suffixIcon: state.confirmedPassword.pure
+                    ? const SizedBox()
+                    : SvgPicture.asset(
+                        state.confirmedPassword.invalid
+                            ? 'assets/icons/verification_error_icon.svg'
+                            : 'assets/icons/verified_icon.svg',
+                        fit: BoxFit.scaleDown,
+                        height: 14,
+                        width: 14,
+                      ),
               ),
             ),
           ],
@@ -240,18 +349,33 @@ class _SignUpButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
-            : SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  key: const Key('signUpForm_continue_Button'),
-                  style: AppTheme.textButtonStyle.copyWith(),
-                  onPressed: state.status.isValidated
-                      ? () => context.read<SignUpCubit>().signUpFormSubmitted()
-                      : null,
-                  child: const TitleText(
-                    text: 'SIGN UP',
-                    color: Color(0xFFFFFFFF),
-                    fontWeight: FontWeight.w600,
+            : ElevatedButton(
+                key: const Key('signUpForm_continue_Button'),
+                // style: AppTheme.textButtonStyle.copyWith(),
+                onPressed: state.status.isValidated
+                    ? () => context.read<SignUpCubit>().signUpFormSubmitted()
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Container(
+                  height: 68,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(
+                        colors: [Color(0xFFE65828), Color(0xFFF59676)]),
+                  ),
+                  child: const Center(
+                    child: TitleText(
+                      text: 'SIGN UP',
+                      color: Color(0xFFFFFFFF),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               );

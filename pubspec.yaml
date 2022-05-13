@@ -44,12 +44,64 @@ flutter:
     - assets/images/
     - assets/icons/
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: SF Pro
+      fonts:
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Ultralight.otf
+          style: normal
+          weight: 100
+        - asset: assets/fonts/SFPro/SF-Pro-Display-UltralightItalic.otf
+          style: italic
+          weight: 100
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Thin.otf
+          style: normal
+          weight: 200
+        - asset: assets/fonts/SFPro/SF-Pro-Display-ThinItalic.otf
+          style: italic
+          weight: 200
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Light.otf
+          style: normal
+          weight: 300
+        - asset: assets/fonts/SFPro/SF-Pro-Display-LightItalic.otf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Regular.otf
+          style: normal
+          weight: 400
+        - asset: assets/fonts/SFPro/SF-Pro-Display-RegularItalic.otf
+          style: italic
+          weight: 400
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Medium.otf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/SFPro/SF-Pro-Display-MediumItalic.otf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Semibold.otf
+          style: normal
+          weight: 600
+        - asset: assets/fonts/SFPro/SF-Pro-Display-SemiboldItalic.otf
+          style: italic
+          weight: 600
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Bold.otf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/SFPro/SF-Pro-Display-BoldItalic.otf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Heavy.otf
+          style: normal
+          weight: 800
+        - asset: assets/fonts/SFPro/SF-Pro-Display-HeavyItalic.otf
+          style: italic
+          weight: 800
+        - asset: assets/fonts/SFPro/SF-Pro-Display-Black.otf
+          style: normal
+          weight: 900
+        - asset: assets/fonts/SFPro/SF-Pro-Display-BlackItalic.otf
+          style: italic
+          weight: 900
+      
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_e_commerce_app/views/pages/onboarding/onboarding_main.dart';
 
 import '../../cubit/bottom_nav_bar/home_cubit.dart';
 import '../../cubit/bottom_nav_bar/home_state.dart';
@@ -122,7 +123,7 @@ class _AppViewState extends State<AppView> {
                 break;
               case AppStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
+                  OnboardingPage.route(),
                   (route) => false,
                 );
                 break;

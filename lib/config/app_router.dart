@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce_app/views/pages/onboarding/onboarding_main.dart';
 
 import '../../views/pages/edit_profile/change_password_page.dart';
 import '../../views/pages/edit_profile/edit_profile_page.dart';
@@ -14,6 +15,9 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return MainPage.route();
+
+      case OnboardingPage.routeName:
+        return OnboardingPage.route();
 
       case ProductDetailPage.routeName:
         return ProductDetailPage.route(product: settings.arguments as Product);
