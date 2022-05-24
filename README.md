@@ -44,6 +44,9 @@ Product Detail Page | Favorites Page | Cart Page | Profile Page |
 |:---:|:---:|:---:|:---:|
 |![](./screenshots/product_detail_page_android.png)|![](./screenshots/favorites_page_android.png)|![](./screenshots/cart_page_android.png)|![](./screenshots/profile_page_android.png)|
 
+## Video Demo
+Link: https://youtu.be/7LdosrNaVKg
+
 ## Directory Structure
 
 ```bash
