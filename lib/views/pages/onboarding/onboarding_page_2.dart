@@ -26,9 +26,11 @@ class Onboarding2 extends StatelessWidget {
                         'assets/icons/nike_logo.svg',
                         //fit: BoxFit.contain,
                         color: Colors.white,
-                        width: AppTheme.fullWidth(context) * 0.44,
+                        width: size.width * 0.44,
+                        fit: BoxFit.scaleDown,
                         // height: 200,
                       ),
+                      // width: AppTheme.fullWidth(context) * 0.44,
                     ),
                     SizedBox(
                       height: size.height * 0.06,
@@ -51,7 +53,7 @@ class Onboarding2 extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            top: size.height * 0.06,
+                            top: size.height * 0.03,
                             left: size.width * 0.04,
                             width: size.width,
                             height: 334,

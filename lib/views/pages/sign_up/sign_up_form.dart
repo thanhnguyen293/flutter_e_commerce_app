@@ -196,7 +196,7 @@ class _UserNameInput extends StatelessWidget {
                               ? 'assets/icons/verification_error_icon.svg'
                               : 'assets/icons/verified_icon.svg',
                           fit: BoxFit.scaleDown,
-                          height: 14,
+                          height: 14 ,
                           width: 14,
                         ),
                 ),

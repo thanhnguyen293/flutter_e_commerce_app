@@ -15,8 +15,8 @@ class Onboarding3 extends StatelessWidget {
         children: [
           Column(
             children: [
-              const SizedBox(
-                height: 140,
+              SizedBox(
+                height: size.height * 0.08,
               ),
               Stack(
                 children: [

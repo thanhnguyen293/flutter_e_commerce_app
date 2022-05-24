@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce_app/themes/light_color.dart';
-import 'package:flutter_e_commerce_app/themes/theme.dart';
 import 'package:flutter_e_commerce_app/views/pages/login/login_page.dart';
+import 'package:flutter_e_commerce_app/views/pages/onboarding/animated_slide_up.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'onboarding_page_1.dart';
@@ -91,7 +89,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           )
                         ],
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 const SizedBox(
                   height: 60,
                 ),
@@ -121,6 +119,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
           _pageIndex == 2
               ? Align(
                   alignment: const Alignment(0, 0.9),
+                  // child: GestureDetector(
+                  //   onVerticalDragUpdate: (dragUpdateDetails) {
+                  //     () => Navigator.of(context)
+                  //         .pushReplacementNamed(LoginPage.routeName);
+                  //   },
+                  //   child: const Text(
+                  //     'Get Started',
+                  //     style: TextStyle(
+                  //       fontFamily: 'SF Pro',
+                  //       fontSize: 24,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
                   child: InkWell(
                     onTap: () => Navigator.of(context)
                         .pushReplacementNamed(LoginPage.routeName),
@@ -136,25 +149,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 )
               : const SizedBox(),
+          _pageIndex == 2 ? AnimatedSlideUp() : const SizedBox(),
           _pageIndex == 2
-              ? Positioned(
-                  bottom: MediaQuery.of(context).size.height * 0.25,
-                  left: 0,
-                  width: MediaQuery.of(context).size.width,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'BUY NOW',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: MediaQuery.of(context).size.width * 0.15,
-                        fontFamily: 'SF Pro',
-                      ),
+              ? Align(
+                  alignment: const Alignment(0, 0.5),
+                  child: Text(
+                    'BUY NOW',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: MediaQuery.of(context).size.width * 0.15,
+                      fontFamily: 'SF Pro',
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
